@@ -1,0 +1,23 @@
+name: Example Test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  LOG_DIR: "/tmp/fabric-operator-example-test/logs"
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: echo token
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+      run: ./try.sh
