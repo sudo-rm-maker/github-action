@@ -7,3 +7,4 @@ else
 fi
 echo "log dir ${LOG_DIR}"
 cat ~/.docker/config.json
+echo "hello"
